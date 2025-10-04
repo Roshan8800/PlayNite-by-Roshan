@@ -1,4 +1,3 @@
-import { signInWithEmailAndPassword } from 'firebase/auth';
 import { securityManager } from '../core/SecurityManager';
 import { authorizationService } from '../authorization/AuthorizationService';
 import { mfaService } from '../auth/MFAService';
@@ -40,6 +39,9 @@ export class SecurityIntegrationService {
 
     try {
       console.log('Initializing security integration...');
+
+      // Initialize security manager
+      await securityManager.initializeSecuritySystems();
 
       // Setup auth state listener for enhanced security
       this.setupAuthStateListener();
@@ -124,7 +126,7 @@ export class SecurityIntegrationService {
 
       // Fallback to legacy authentication
       if (this.config.fallbackToLegacy) {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const userCredential = await auth.signInWithEmailAndPassword(email, password);
 
         return {
           success: true,

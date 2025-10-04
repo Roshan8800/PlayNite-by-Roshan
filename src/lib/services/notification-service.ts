@@ -29,9 +29,6 @@ import {
   Timestamp,
   onSnapshot,
   arrayUnion,
-  QueryOrderByConstraint,
-  QueryFieldFilterConstraint,
-  QueryLimitConstraint,
 } from 'firebase/firestore';
 import { db } from '../firebase';
 import type {
@@ -221,10 +218,11 @@ export class NotificationService {
 
     // Also create a browser notification if permission granted
     if (Notification.permission === 'granted') {
-      const { title, body, icon } = payload.notification || {};
+      const { title, body, icon, image } = payload.notification || {};
       new Notification(title || 'New Notification', {
         body: body || 'You have a new notification',
         icon: icon || '/favicon.ico',
+        image: image,
         badge: '/favicon.ico',
       });
     }
@@ -325,7 +323,7 @@ export class NotificationService {
         message: 'Failed to create notification',
         code: 'NOTIFICATION_CREATE_FAILED',
         statusCode: 500,
-        details: error instanceof Error ? { message: error.message, stack: error.stack } : { info: String(error) },
+        details: error,
       });
     }
   }
@@ -335,7 +333,7 @@ export class NotificationService {
     filters?: NotificationFilter & { page?: number; limit?: number }
   ): Promise<PaginatedSocialResponse<NotificationType>> {
     try {
-      const constraints: (QueryFieldFilterConstraint | QueryOrderByConstraint | QueryLimitConstraint)[] = [where('userId', '==', userId)];
+      const constraints = [where('userId', '==', userId)];
 
       if (filters?.types?.length) {
         constraints.push(where('type', 'in', filters.types));
@@ -414,7 +412,7 @@ export class NotificationService {
         });
       }
 
-      const notification = notificationDoc.data() as NotificationType;
+      const notification = notificationDoc.data() as Notification;
       if (notification.userId !== userId) {
         throw new SocialError({
           message: 'Unauthorized',
@@ -518,7 +516,7 @@ export class NotificationService {
         const notificationDoc = await getDoc(notificationRef);
 
         if (notificationDoc.exists()) {
-          const notification = notificationDoc.data() as NotificationType;
+          const notification = notificationDoc.data() as Notification;
           if (notification.userId === userId) {
             switch (action.action) {
               case 'mark_read':

@@ -173,7 +173,7 @@ export class NotificationAnalyticsService {
   private calculateAnalytics(
     notifications: NotificationType[],
     events: any[],
-    period: 'day' | 'week' | 'month' | 'year'
+    period: string
   ): NotificationAnalytics {
     const totalSent = notifications.length;
     const totalDelivered = events.filter(e => e.event === 'delivered').length;
@@ -401,10 +401,10 @@ export class NotificationAnalyticsService {
     };
   }
 
-  private getEmptyAnalytics(userId: string, period: 'day' | 'week' | 'month' | 'year'): NotificationAnalytics {
+  private getEmptyAnalytics(userId: string, period: string): NotificationAnalytics {
     return {
       userId,
-      period,
+      period: period as 'day' | 'week' | 'month' | 'year',
       totalSent: 0,
       totalDelivered: 0,
       totalRead: 0,

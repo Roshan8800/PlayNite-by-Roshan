@@ -148,7 +148,7 @@ export class NotificationAutomationEngine {
         message: 'Failed to create notification campaign',
         code: 'CAMPAIGN_CREATE_FAILED',
         statusCode: 500,
-        details: error instanceof Error ? { message: error.message, stack: error.stack } : { info: String(error) },
+        details: error,
       });
     }
   }
@@ -203,7 +203,7 @@ export class NotificationAutomationEngine {
         message: 'Failed to pause campaign',
         code: 'CAMPAIGN_PAUSE_FAILED',
         statusCode: 500,
-        details: error instanceof Error ? { message: error.message, stack: error.stack } : { info: String(error) },
+        details: error as Record<string, any>,
       });
     }
   }
@@ -226,7 +226,7 @@ export class NotificationAutomationEngine {
         message: 'Failed to stop campaign',
         code: 'CAMPAIGN_STOP_FAILED',
         statusCode: 500,
-        details: error instanceof Error ? { message: error.message, stack: error.stack } : { info: String(error) },
+        details: error as Record<string, any>,
       });
     }
   }
@@ -283,7 +283,7 @@ export class NotificationAutomationEngine {
         message: 'Failed to create notification template',
         code: 'TEMPLATE_CREATE_FAILED',
         statusCode: 500,
-        details: error instanceof Error ? { message: error.message, stack: error.stack } : { info: String(error) },
+        details: error as Record<string, any>,
       });
     }
   }

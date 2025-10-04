@@ -26,15 +26,10 @@ export interface NavigationAnalyticsConfig {
   maxEventsPerSession: number;
 }
 
-type PerformanceMetricsCache = {
-  averageLoadTime: number;
-  count: number;
-};
-
 export class NavigationAnalytics {
   private config: NavigationAnalyticsConfig;
   private eventBuffer: NavigationEvent[] = [];
-  private metricsCache: Map<string, NavigationMetrics | PerformanceMetricsCache> = new Map();
+  private metricsCache: Map<string, NavigationMetrics> = new Map();
   private insightsCache: Map<string, NavigationInsight[]> = new Map();
 
   constructor(config: Partial<NavigationAnalyticsConfig> = {}) {
@@ -100,10 +95,9 @@ export class NavigationAnalytics {
         }
       };
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : String(error);
       return {
         success: false,
-        error: this.createNavigationError('TRACKING_ERROR' as any, errorMessage),
+        error: this.createNavigationError('TRACKING_ERROR', error.message),
         metadata: {
           timestamp: new Date(),
           version: '1.0.0',
@@ -153,10 +147,9 @@ export class NavigationAnalytics {
         }
       };
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : String(error);
       return {
         success: false,
-        error: this.createNavigationError('METRICS_ERROR' as any, errorMessage),
+        error: this.createNavigationError('METRICS_ERROR', error.message),
         metadata: {
           timestamp: new Date(),
           version: '1.0.0',
@@ -202,10 +195,9 @@ export class NavigationAnalytics {
         }
       };
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : String(error);
       return {
         success: false,
-        error: this.createNavigationError('INSIGHTS_ERROR' as any, errorMessage),
+        error: this.createNavigationError('INSIGHTS_ERROR', error.message),
         metadata: {
           timestamp: new Date(),
           version: '1.0.0',
@@ -502,7 +494,7 @@ export class NavigationAnalytics {
       });
     }
 
-    const metrics = this.metricsCache.get(route) as NavigationMetrics;
+    const metrics = this.metricsCache.get(route)!;
     metrics.totalNavigations++;
   }
 
@@ -515,13 +507,11 @@ export class NavigationAnalytics {
         count: 0
       };
 
-      if ('count' in currentMetrics) {
-        currentMetrics.count = (currentMetrics.count || 0) + 1;
-        currentMetrics.averageLoadTime =
-          (currentMetrics.averageLoadTime * (currentMetrics.count - 1) + event.duration) / currentMetrics.count;
+      currentMetrics.count = (currentMetrics.count || 0) + 1;
+      currentMetrics.averageLoadTime =
+        (currentMetrics.averageLoadTime * (currentMetrics.count - 1) + event.duration) / currentMetrics.count;
 
-        this.metricsCache.set('performance', currentMetrics);
-      }
+      this.metricsCache.set('performance', currentMetrics);
     }
   }
 
@@ -542,7 +532,7 @@ export class NavigationAnalytics {
     return `evt_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
   }
 
-  private createNavigationError(type: NavigationError['type'], message: string): NavigationError {
+  private createNavigationError(type: string, message: string): NavigationError {
     return {
       errorId: `${type}_${Date.now()}`,
       type,
