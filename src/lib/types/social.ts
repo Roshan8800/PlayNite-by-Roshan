@@ -31,6 +31,10 @@ export interface SocialUser {
   allowFriendRequests: boolean;
   allowTagging: boolean;
   allowMentions: boolean;
+
+  // Achievement properties
+  lastPostDate?: string;
+  postingStreak?: number;
 }
 
 export interface Follow {

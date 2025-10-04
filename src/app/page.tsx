@@ -1,10 +1,11 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useForm, type SubmitHandler } from "react-hook-form";
+import { useForm, type SubmitHandler, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { differenceInYears, isFuture, isValid } from "date-fns";
+import { differenceInYears, getDaysInMonth, isFuture, isValid } from "date-fns";
+import { useEffect, useMemo } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -49,7 +50,7 @@ const ageSchema = z.object({
       );
     },
     {
-      message: "Please enter a valid date.",
+      message: "Invalid day for the selected month.",
       path: ["root"],
     }
   )
@@ -67,8 +68,30 @@ export default function AgeVerificationPage() {
   const router = useRouter();
   const form = useForm<AgeFormValues>({
     resolver: zodResolver(ageSchema),
-    defaultValues: {},
+    defaultValues: {
+      day: undefined,
+      month: undefined,
+      year: undefined,
+    },
   });
+
+  const { control, setValue } = form;
+  const watchedMonth = useWatch({ control, name: "month" });
+  const watchedYear = useWatch({ control, name: "year" });
+  const watchedDay = useWatch({ control, name: "day" });
+
+  const daysInMonth = useMemo(() => {
+    if (watchedYear && watchedMonth) {
+      return getDaysInMonth(new Date(watchedYear, watchedMonth - 1));
+    }
+    return 31;
+  }, [watchedMonth, watchedYear]);
+
+  useEffect(() => {
+    if (watchedDay && watchedDay > daysInMonth) {
+      setValue("day", daysInMonth);
+    }
+  }, [daysInMonth, watchedDay, setValue]);
 
   const onSubmit: SubmitHandler<AgeFormValues> = (data) => {
     const birthDate = new Date(data.year, data.month - 1, data.day);
@@ -89,7 +112,7 @@ export default function AgeVerificationPage() {
     value: i + 1,
     label: new Date(0, i).toLocaleString("default", { month: "long" }),
   }));
-  const days = Array.from({ length: 31 }, (_, i) => i + 1);
+  const days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
   const { errors } = form.formState;
 
   return (
@@ -116,7 +139,12 @@ export default function AgeVerificationPage() {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Month</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value?.toString()}>
+                      <Select
+                        onValueChange={(value: string) => {
+                          field.onChange(parseInt(value));
+                        }}
+                        defaultValue={field.value?.toString()}
+                      >
                         <FormControl>
                           <SelectTrigger>
                             <SelectValue placeholder="Month" />
@@ -139,7 +167,12 @@ export default function AgeVerificationPage() {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Day</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value?.toString()}>
+                      <Select
+                        onValueChange={(value: string) => {
+                          field.onChange(parseInt(value));
+                        }}
+                        value={field.value?.toString()}
+                      >
                         <FormControl>
                           <SelectTrigger>
                             <SelectValue placeholder="Day" />
@@ -162,7 +195,12 @@ export default function AgeVerificationPage() {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Year</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value?.toString()}>
+                      <Select
+                        onValueChange={(value: string) => {
+                          field.onChange(parseInt(value));
+                        }}
+                        defaultValue={field.value?.toString()}
+                      >
                         <FormControl>
                           <SelectTrigger>
                             <SelectValue placeholder="Year" />

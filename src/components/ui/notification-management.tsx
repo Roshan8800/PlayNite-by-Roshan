@@ -76,6 +76,30 @@ const statusStyles = {
   snoozed: 'opacity-50',
 };
 
+const parseSnoozeDuration = (duration: string): string => {
+  const now = new Date();
+  switch (duration) {
+    case '30m':
+      now.setMinutes(now.getMinutes() + 30);
+      break;
+    case '1h':
+      now.setHours(now.getHours() + 1);
+      break;
+    case '4h':
+      now.setHours(now.getHours() + 4);
+      break;
+    case '1d':
+      now.setDate(now.getDate() + 1);
+      break;
+    case '1w':
+      now.setDate(now.getDate() + 7);
+      break;
+    default:
+      now.setHours(now.getHours() + 1);
+  }
+  return now.toISOString();
+};
+
 export function NotificationManagement({
   notifications,
   onBulkAction,
@@ -165,30 +189,6 @@ export function NotificationManagement({
     const duration = parseSnoozeDuration(snoozeDuration);
     handleBulkAction('snooze', { snoozeUntil: duration });
     setSnoozeDialogOpen(false);
-  };
-
-  const parseSnoozeDuration = (duration: string): string => {
-    const now = new Date();
-    switch (duration) {
-      case '30m':
-        now.setMinutes(now.getMinutes() + 30);
-        break;
-      case '1h':
-        now.setHours(now.getHours() + 1);
-        break;
-      case '4h':
-        now.setHours(now.getHours() + 4);
-        break;
-      case '1d':
-        now.setDate(now.getDate() + 1);
-        break;
-      case '1w':
-        now.setDate(now.getDate() + 7);
-        break;
-      default:
-        now.setHours(now.getHours() + 1);
-    }
-    return now.toISOString();
   };
 
   const formatTimeAgo = (dateString: string) => {
@@ -467,6 +467,7 @@ export function NotificationManagement({
                     onMarkAsRead={() => onMarkAsRead(notification.id)}
                     onDelete={() => onDeleteNotification(notification.id)}
                     formatTimeAgo={formatTimeAgo}
+                    onBulkAction={onBulkAction}
                   />
                 ))}
               </div>
@@ -487,6 +488,7 @@ interface NotificationManagementCardProps {
   onMarkAsRead: () => void;
   onDelete: () => void;
   formatTimeAgo: (date: string) => string;
+  onBulkAction: (action: string, notificationIds: string[], options?: any) => void;
 }
 
 function NotificationManagementCard({
@@ -497,6 +499,7 @@ function NotificationManagementCard({
   onMarkAsRead,
   onDelete,
   formatTimeAgo,
+  onBulkAction,
 }: NotificationManagementCardProps) {
   const isArchived = (notification as any).archived;
   const isSnoozed = (notification as any).snoozed;
@@ -641,7 +644,7 @@ function NotificationManagementCard({
 
                     <DropdownMenuItem onClick={(e) => {
                       e.stopPropagation();
-                      // Snooze single notification
+                      onBulkAction('snooze', [notification.id], { snoozeUntil: parseSnoozeDuration('1h') });
                     }}>
                       <Clock className="h-4 w-4 mr-2" />
                       Snooze

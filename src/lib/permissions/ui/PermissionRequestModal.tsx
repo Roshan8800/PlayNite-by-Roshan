@@ -306,6 +306,17 @@ export const PermissionRequestModal: React.FC<PermissionRequestModalProps> = ({
         ],
         privacyNote: 'Contact data is encrypted and never shared with third parties. You control which contacts to import.'
       },
+      [PermissionType.CALENDAR]: {
+        title: 'Calendar Access',
+        shortDescription: 'Schedule events and reminders',
+        detailedExplanation: 'This app needs calendar access to create events, set reminders, and integrate with your schedule.',
+        benefits: [
+          'Schedule events directly from the app',
+          'Get reminders for important dates',
+          'Sync with your device calendar'
+        ],
+        privacyNote: 'Calendar access is only used to manage events you create or link within the app.'
+      },
       [PermissionType.BIOMETRIC]: {
         title: 'Biometric Authentication',
         shortDescription: 'Secure access with fingerprint or Face ID',
@@ -492,6 +503,17 @@ export const PermissionRequestModal: React.FC<PermissionRequestModalProps> = ({
           'Social features'
         ],
         privacyNote: 'Internet access is required for most app features and respects your privacy and data preferences.'
+      },
+      [PermissionType.PHONE_STATE]: {
+        title: 'Phone State Access',
+        shortDescription: 'Read phone status',
+        detailedExplanation: 'Phone state access enables features that respond to phone status like incoming calls.',
+        benefits: [
+          'Call interruption handling',
+          'Better media playback',
+          'Enhanced user experience'
+        ],
+        privacyNote: 'Phone state access is limited to status information and never accesses personal call data.'
       },
       [PermissionType.CALL_PHONE]: {
         title: 'Phone Call Access',

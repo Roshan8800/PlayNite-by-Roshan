@@ -128,7 +128,7 @@ export const DEFAULT_NAVIGATION_CONFIG: NavigationConfig = {
 
 // Utility functions
 export const createNavigationError = (
-  type: string,
+  type: NavigationError['type'],
   message: string,
   route?: string
 ): NavigationError => ({
