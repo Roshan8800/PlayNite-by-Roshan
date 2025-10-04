@@ -13,7 +13,6 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from "@/components/ui/form";
 import {
   Card,
@@ -51,7 +50,7 @@ const ageSchema = z.object({
     },
     {
       message: "Please enter a valid date.",
-      path: ["day"],
+      path: ["root"],
     }
   )
   .refine(
@@ -91,6 +90,7 @@ export default function AgeVerificationPage() {
     label: new Date(0, i).toLocaleString("default", { month: "long" }),
   }));
   const days = Array.from({ length: 31 }, (_, i) => i + 1);
+  const { errors } = form.formState;
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-4">
@@ -180,11 +180,14 @@ export default function AgeVerificationPage() {
                   )}
                 />
               </div>
-              <FormMessage>
-                {form.formState.errors.day?.message ||
-                  form.formState.errors.month?.message ||
-                  form.formState.errors.year?.message}
-              </FormMessage>
+              {(errors.root || errors.day || errors.month || errors.year) && (
+                <p data-testid="form-error" className="text-sm font-medium text-destructive">
+                  {errors.root?.message ||
+                    errors.day?.message ||
+                    errors.month?.message ||
+                    errors.year?.message}
+                </p>
+              )}
               <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
                 Enter
               </Button>
