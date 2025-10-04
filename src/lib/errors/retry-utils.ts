@@ -1,4 +1,5 @@
-import { ErrorManager, ErrorCategory, RetryConfig } from './ErrorManager';
+import { ErrorManager } from './ErrorManager';
+import { ErrorCategory, RetryConfig } from './types';
 
 export interface RetryOptions {
   maxAttempts?: number;
