@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { Suspense, useState, useEffect, useRef } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import {
@@ -39,7 +39,7 @@ import { SearchResult } from "@/lib/mock-backend";
 
 const RESULTS_PER_PAGE = 20;
 
-export default function SearchPage() {
+const SearchPageComponent = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const observerTarget = useRef<HTMLDivElement>(null);
@@ -521,5 +521,13 @@ export default function SearchPage() {
         </TabsContent>
       </Tabs>
     </div>
+  );
+};
+
+export default function SearchPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SearchPageComponent />
+    </Suspense>
   );
 }
