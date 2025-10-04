@@ -787,16 +787,55 @@ export class PlatformPermissionHandler {
    * Map our permission types to Web API permission names
    */
   private mapPermissionToWebAPI(type: PermissionType): PermissionName | null {
-    const mapping: Record<string, PermissionName | null> = {
-      [PermissionType.CAMERA]: 'camera' as PermissionName,
-      [PermissionType.MICROPHONE]: 'microphone' as PermissionName,
-      [PermissionType.LOCATION]: 'geolocation' as PermissionName,
-      [PermissionType.NOTIFICATIONS]: 'notifications' as PermissionName,
-      [PermissionType.RECORD_AUDIO]: 'microphone' as PermissionName,
-      [PermissionType.SPEECH_RECOGNITION]: 'microphone' as PermissionName,
-      [PermissionType.LOCATION_ALWAYS]: 'geolocation' as PermissionName,
-      [PermissionType.LOCATION_WHEN_IN_USE]: 'geolocation' as PermissionName,
-      [PermissionType.PUSH_NOTIFICATIONS]: 'notifications' as PermissionName,
+    const mapping: Record<PermissionType, PermissionName | null> = {
+      [PermissionType.CAMERA]: 'camera',
+      [PermissionType.MICROPHONE]: 'microphone',
+      [PermissionType.LOCATION]: 'geolocation',
+      [PermissionType.NOTIFICATIONS]: 'notifications',
+      [PermissionType.STORAGE]: null, // Not directly supported in Permissions API
+      [PermissionType.CONTACTS]: null, // Not supported in web
+      [PermissionType.CALENDAR]: null, // Not supported in web
+      [PermissionType.BIOMETRIC]: null, // Not supported in Permissions API
+      [PermissionType.BLUETOOTH]: null, // Not supported in web
+      [PermissionType.NFC]: null, // Not supported in web
+      [PermissionType.HEALTH]: null, // Not supported in web
+      [PermissionType.SMS]: null, // Not supported in web
+      [PermissionType.PHONE_STATE]: null, // Not supported in web
+      [PermissionType.BACKGROUND_REFRESH]: null, // Not supported in web
+      [PermissionType.SYSTEM_ALERT_WINDOW]: null, // Not supported in web
+      [PermissionType.WRITE_SETTINGS]: null, // Not supported in web
+      [PermissionType.ACCESSIBILITY]: null, // Not supported in web
+      [PermissionType.RECORD_AUDIO]: 'microphone',
+      [PermissionType.MODIFY_AUDIO_SETTINGS]: null, // Not supported in web
+      [PermissionType.BIND_VPN_SERVICE]: null, // Not supported in web
+      [PermissionType.CAMERA_ROLL]: null, // Not supported in web
+      [PermissionType.MEDIA_LIBRARY]: null, // Not supported in web
+      [PermissionType.SPEECH_RECOGNITION]: 'microphone',
+      [PermissionType.LOCATION_ALWAYS]: 'geolocation',
+      [PermissionType.LOCATION_WHEN_IN_USE]: 'geolocation',
+      [PermissionType.PUSH_NOTIFICATIONS]: 'notifications',
+      [PermissionType.EXTERNAL_STORAGE]: null, // Not supported in web
+      [PermissionType.NETWORK_STATE]: null, // Not supported in web
+      [PermissionType.INTERNET]: null, // Not supported in web
+      [PermissionType.CALL_PHONE]: null, // Not supported in web
+      [PermissionType.READ_PHONE_STATE]: null, // Not supported in web
+      [PermissionType.SEND_SMS]: null, // Not supported in web
+      [PermissionType.RECEIVE_SMS]: null, // Not supported in web
+      [PermissionType.MOTION]: null, // Not supported in web
+      [PermissionType.ACTIVITY_RECOGNITION]: null, // Not supported in web
+      [PermissionType.BODY_SENSORS]: null, // Not supported in web
+      [PermissionType.FACE_ID]: null, // Not supported in web
+      [PermissionType.TOUCH_ID]: null, // Not supported in web
+      [PermissionType.FINGERPRINT]: null, // Not supported in web
+      [PermissionType.BLUETOOTH_ADMIN]: null, // Not supported in web
+      [PermissionType.BLUETOOTH_ADVERTISE]: null, // Not supported in web
+      [PermissionType.BLUETOOTH_CONNECT]: null, // Not supported in web
+      [PermissionType.BLUETOOTH_SCAN]: null, // Not supported in web
+      [PermissionType.NFC_TRANSACTION_EVENT]: null, // Not supported in web
+      [PermissionType.CONTROL_VPN]: null, // Not supported in web
+      [PermissionType.HEALTH_SHARE]: null, // Not supported in web
+      [PermissionType.HEALTH_UPDATE]: null, // Not supported in web
+      [PermissionType.BACKGROUND_APP_REFRESH]: null, // Not supported in web
     };
 
     return mapping[type] || null;

@@ -51,10 +51,9 @@ export class RetryManager {
           maxDelay
         );
 
-        const errorMessage = error instanceof Error ? error.message : String(error);
         // Report retry attempt to error manager
         this.errorManager.reportError(
-          `Retry attempt ${attempt}/${maxAttempts} failed: ${errorMessage}`,
+          `Retry attempt ${attempt}/${maxAttempts} failed: ${error.message}`,
           ErrorCategory.NETWORK,
           undefined, // severity will be auto-determined
           {
@@ -63,7 +62,7 @@ export class RetryManager {
               attempt,
               maxAttempts,
               delay,
-              originalError: errorMessage
+              originalError: error.message
             }
           }
         );
@@ -177,10 +176,9 @@ export class CircuitBreakerManager {
     try {
       return await circuitBreaker.execute(operation);
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : String(error);
       // Report circuit breaker events to error manager
       this.errorManager.reportError(
-        `Circuit breaker '${name}' prevented operation: ${errorMessage}`,
+        `Circuit breaker '${name}' prevented operation: ${error.message}`,
         ErrorCategory.SYSTEM,
         undefined,
         {
@@ -209,15 +207,13 @@ export async function withNetworkRetry<T>(
     baseDelay: 1000,
     maxDelay: 5000,
     backoffMultiplier: 2,
-    retryCondition: (error: any) => {
+    retryCondition: (error) => {
       // Retry on network errors, timeouts, and 5xx status codes
       return (
-        error instanceof Error && (
-          error.name === 'NetworkError' ||
-          error.name === 'TimeoutError' ||
-          error.message?.includes('fetch') ||
-          ('status' in error && typeof error.status === 'number' && error.status >= 500)
-        )
+        error.name === 'NetworkError' ||
+        error.name === 'TimeoutError' ||
+        error.message?.includes('fetch') ||
+        (error.status && error.status >= 500)
       );
     },
     ...options

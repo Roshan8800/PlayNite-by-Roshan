@@ -172,28 +172,25 @@ export function EmptyState({
   onRetry,
   isLoading = false
 }: EmptyStateProps) {
+  const config = emptyStateConfig[type];
+  const displayTitle = title || config.title;
+  const displayDescription = description || config.description;
+  const displayIcon = icon || config.icon;
+  const displayActions = actions.length > 0 ? actions : config.defaultActions;
+
   const sizeClasses = {
     sm: 'py-8',
     md: 'py-12',
     lg: 'py-16'
   };
 
-  if (type === 'custom') {
-    if (customContent) {
-      return (
-        <div className={`flex flex-col items-center justify-center text-center ${sizeClasses[size]} ${className}`}>
-          {customContent}
-        </div>
-      );
-    }
-    return null;
+  if (type === 'custom' && customContent) {
+    return (
+      <div className={`flex flex-col items-center justify-center text-center ${sizeClasses[size]} ${className}`}>
+        {customContent}
+      </div>
+    );
   }
-
-  const config = emptyStateConfig[type];
-  const displayTitle = title || config.title;
-  const displayDescription = description || config.description;
-  const displayIcon = icon || config.icon;
-  const displayActions = actions.length > 0 ? actions : config.defaultActions;
 
   return (
     <Card className={`w-full ${className}`}>
@@ -212,7 +209,7 @@ export function EmptyState({
 
         {displayActions.length > 0 && (
           <div className="flex flex-col sm:flex-row gap-3">
-            {displayActions.map((action: EmptyStateAction, index: number) => (
+            {displayActions.map((action, index) => (
               <Button
                 key={index}
                 variant={action.variant || 'outline'}

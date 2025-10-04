@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ErrorBoundary } from '@/components/ui/error-boundary';
 import { ErrorFallback, NetworkErrorFallback, AuthErrorFallback, useErrorHandler } from '@/components/ui/error-fallback';
-import { EmptyState, EmptyStateType } from '@/components/ui/empty-state';
+import { EmptyState } from '@/components/ui/empty-state';
 import { ErrorManager, ErrorCategory, ErrorSeverity, errorIntegrationService } from '@/lib/errors';
 import { withNetworkRetry, CircuitBreakerManager } from '@/lib/errors';
 

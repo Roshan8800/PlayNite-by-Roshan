@@ -1,8 +1,7 @@
-import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
 import { panelSecurityManager } from '@/lib/panels/security/PanelSecurityManager';
 import { accessControlManager } from '@/lib/panels/managers/AccessControlManager';
-import { AuditLogger, AuditEventType } from '../audit/AuditLogger';
+import { AuditLogger } from '../audit/AuditLogger';
 import { DataProtectionManager } from '../data-protection/DataProtectionManager';
 import { ThreatDetectionEngine } from '../monitoring/ThreatDetectionEngine';
 import { ComplianceManager } from '../compliance/ComplianceManager';
@@ -180,7 +179,7 @@ export class SecurityManager {
 
       // Log successful validation
       await this.auditLogger.logSecurityEvent({
-        type: AuditEventType.AUTHORIZATION,
+        type: 'SECURITY_VALIDATION_SUCCESS',
         userId: context.userId,
         operation: context.operation,
         resource: context.resource,
@@ -196,7 +195,7 @@ export class SecurityManager {
     } catch (error) {
       // Log security validation error
       await this.auditLogger.logSecurityEvent({
-        type: AuditEventType.SECURITY_VIOLATION,
+        type: 'SECURITY_VALIDATION_ERROR',
         userId: context.userId,
         operation: context.operation,
         metadata: { error: error instanceof Error ? error.message : 'Unknown error' },
@@ -260,7 +259,7 @@ export class SecurityManager {
 
       // Log successful authentication
       await this.auditLogger.logSecurityEvent({
-        type: AuditEventType.AUTHENTICATION,
+        type: 'USER_AUTHENTICATION',
         userId: firebaseUser.uid,
         operation: 'login',
         metadata: { method: 'email_password', mfaUsed: !!mfaToken },
@@ -274,7 +273,7 @@ export class SecurityManager {
 
     } catch (error) {
       await this.auditLogger.logSecurityEvent({
-        type: AuditEventType.AUTHENTICATION,
+        type: 'USER_AUTHENTICATION_FAILED',
         operation: 'login',
         metadata: {
           email,
@@ -492,13 +491,13 @@ export class SecurityManager {
       try {
         await this.dataProtection.rotateEncryptionKeys();
         await this.auditLogger.logSecurityEvent({
-          type: AuditEventType.SYSTEM_EVENT,
+          type: 'KEY_ROTATION',
           operation: 'scheduled_rotation',
           success: true
         });
       } catch (error) {
         await this.auditLogger.logSecurityEvent({
-          type: AuditEventType.SYSTEM_EVENT,
+          type: 'KEY_ROTATION_FAILED',
           operation: 'scheduled_rotation',
           metadata: { error: error instanceof Error ? error.message : 'Unknown error' },
           success: false
@@ -568,7 +567,7 @@ export class SecurityManager {
     this.config = { ...this.config, ...newConfig };
 
     await this.auditLogger.logSecurityEvent({
-      type: AuditEventType.SYSTEM_EVENT,
+      type: 'CONFIG_UPDATE',
       operation: 'security_config_update',
       metadata: { updatedFields: Object.keys(newConfig) },
       success: true
