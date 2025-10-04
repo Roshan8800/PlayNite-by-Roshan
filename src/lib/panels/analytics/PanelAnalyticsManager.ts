@@ -227,7 +227,7 @@ export class PanelAnalyticsManager {
       existingMetrics.loadTime = (existingMetrics.loadTime * (1 - weight)) + (metrics.loadTime * weight);
       existingMetrics.interactionLatency = (existingMetrics.interactionLatency * (1 - weight)) + (metrics.interactionLatency * weight);
       existingMetrics.errorRate = (existingMetrics.errorRate * (1 - weight)) + (metrics.errorRate * weight);
-      existingMetrics.userSatisfaction = (existingMetrics.userSatisfaction * (1 - weight)) + ((metrics.userSatisfaction || 0) * weight);
+      existingMetrics.userSatisfaction = ((existingMetrics.userSatisfaction ?? 0) * (1 - weight)) + ((metrics.userSatisfaction ?? 0) * weight);
     } else {
       this.performanceMetrics.set(panelType, { ...metrics });
     }
@@ -256,7 +256,7 @@ export class PanelAnalyticsManager {
     }
 
     // Engagement-based recommendations
-    if (analytics.performanceMetrics.userSatisfaction < 70) {
+    if ((analytics.performanceMetrics.userSatisfaction ?? 0) < 70) {
       recommendations.push({
         id: `engage_${analytics.panelType}_${Date.now()}`,
         panelType: analytics.panelType,
@@ -482,7 +482,7 @@ export class PanelAnalyticsManager {
       optimizations.push('Implement retry mechanisms for failed operations');
     }
 
-    if (metrics.userSatisfaction < 70) {
+    if ((metrics.userSatisfaction ?? 0) < 70) {
       optimizations.push('Simplify user interface and reduce cognitive load');
       optimizations.push('Add contextual help and onboarding flows');
     }

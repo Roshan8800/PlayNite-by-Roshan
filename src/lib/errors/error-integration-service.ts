@@ -1,4 +1,5 @@
-import { ErrorManager, ErrorCategory, ErrorSeverity, PlayNiteError } from './ErrorManager';
+import { ErrorManager } from './ErrorManager';
+import { ErrorCategory, ErrorSeverity, PlayNiteError } from './types';
 import { notificationService } from '../services/notification-service';
 import { notificationAnalyticsService } from '../services/notification-analytics-service';
 

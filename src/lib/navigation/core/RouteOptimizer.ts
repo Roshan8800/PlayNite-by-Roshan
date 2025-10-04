@@ -90,9 +90,10 @@ export class RouteOptimizer {
         }
       };
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
       return {
         success: false,
-        error: this.createOptimizationError('OPTIMIZATION_ERROR', error.message, route),
+        error: this.createOptimizationError('optimization_error', errorMessage, route),
         metadata: {
           timestamp: new Date(),
           version: '1.0.0',
@@ -141,9 +142,10 @@ export class RouteOptimizer {
         }
       };
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
       return {
         success: false,
-        error: this.createOptimizationError('PREFETCH_ERROR', error.message, route),
+        error: this.createOptimizationError('optimization_error', errorMessage, route),
         metadata: {
           timestamp: new Date(),
           version: '1.0.0',
@@ -589,7 +591,7 @@ export class RouteOptimizer {
     };
   }
 
-  private createOptimizationError(type: string, message: string, route?: string): NavigationError {
+  private createOptimizationError(type: NavigationError['type'], message: string, route?: string): NavigationError {
     return {
       errorId: `${type}_${Date.now()}`,
       type,

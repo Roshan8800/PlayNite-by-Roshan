@@ -338,6 +338,10 @@ export interface NavigationAPIResponse<T> {
     requestId: string;
     cached?: boolean;
     processingTime?: number;
+    sampled?: boolean;
+    status?: string;
+    skipped?: string;
+    strategy?: string;
   };
 }
 
