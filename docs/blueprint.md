@@ -1,0 +1,101 @@
+# **App Name**: PlayNite
+
+## Core Features:
+
+- User Authentication: Secure user registration and login system with role-based access control (user/admin) including birthday input for age verification on the Sign-Up page. When the website opens, navigate to the age verification screen. The system should automatically calculate the user’s age when they enter their birthday.
+- Video Streaming: High-quality video streaming with adaptive bitrate support. Videos are curated (no uploads allowed). Includes 80+ new features for video playback and video streaming in the User Panel.
+- Interactive Real-time Chat: Allow users to chat, interact with video and rate content in real-time, fostering engagement and content feedback. Video rating will influence content selection using collaborative filtering, allowing for personalized content recommendations.
+- Content Curation Tool: Admin panel to add, remove, and manage videos and associated metadata. Includes bulk upload feature supporting ZIP, CSV, and other formats (max 10 GB) and direct import (drag or drop) for images, videos, short videos, reels, and PDFs.
+- AI-Powered Personalized Recommendations: A DeepSeek powered tool which provides video recommendations based on viewing history and preferences (model: DeepSeek R1 0528 Qwen3 8B, API key: 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). Includes 40+ AI-powered features trained for PlayNite branding.
+- User Profile Management: Users can manage their profiles, preferences, and viewing history. Includes a Settings page for the User Panel.
+- Admin Dashboard: Admin panel for user management, content moderation, and site analytics. Includes real-time chat, likes, comments, and related interactions.
+- Reels Section: Complete Reels section with all features, UI/UX design, and logic.
+- Real-time Streaming and Live Streaming: Build real-time streaming and real-time live streaming with the required UI/UX design, features, and logic.
+- Images and PDF Section: Create an Images and PDF section for both the User Panel and Admin Panel, allowing uploads.
+- Stories Feature: Build a complete Stories feature in the User Panel.
+- Hamburger Menu: Add a Hamburger Menu (☰) with a slide-out drawer for the User Panel.
+- About Page: Create an About Page for personal branding and author/developer credits: Roshan Sahu and Papun Sahu (User Panel).
+- Premium Features: Implement 20+ new premium features for the User Panel. Also includes 50+ more new features for the User Panel.
+- Content Sections: Create two separate link sections: one for Study and another for 18+ content. Implement an Admin Panel feature to upload external website links with details, divided into Study and 18+ sections.
+- Admin Panel Folder: Separately Create a Folder for the Admin Panel
+- Monica Screen: If the user is 18 or older, navigate to the gender selection screen. If the user is under 18, navigate to the study link section. Show two options: Male and Female. When the user selects Male, navigate to the Monica page/screen. Monica Screen – Character: A 3D 20-year-old smart, beautiful, gorgeous Indian woman. She is wearing a traditional South Indian saree for 'suhagrat' (first night) in a beautifully decorated traditional room/environment. She is holding a glass of milk, entering the room, and saying: 'Welcome to PlayNite.' Then she introduces herself: 'My name is Monica.' After that, she asks: 'Can you drink milk?' If the user types 'YES', display the message: 'Let's enjoy,' then navigate to the PlayNite main/home screen. If the user types 'NO', navigate to the study section.
+- Jonny Screen: When the user selects Female, navigate to the Jonny page/screen. Jonny Screen – Character: Porn star Jonny Sins as a doctor in a medical clinic environment. The clinic name is 'Jonny Care.' He says: 'Welcome to PlayNite.' Then he introduces himself: 'I am Dr. Jonny Sins.' Then he continues: 'I think you feel bad and are looking for something. Do you need help?'
+- Advanced Search Filters: Implement advanced search filters allowing users to refine search based on various criteria such as resolution, duration, and specific tags.
+- Customizable Video Player: Allow users to customize their video player settings, including playback speed, volume control, and subtitle options.
+- Interactive Video Transcripts: Generate interactive video transcripts that highlight text as the video plays, improving accessibility and engagement.
+- Offline Viewing Support: Enable users to download videos for offline viewing, catering to users with limited internet access.
+- Personalized Watchlists: Allow users to create and manage personalized watchlists to organize and track desired content.
+- Content Recommendation Engine: Develop a sophisticated recommendation engine that suggests videos based on viewing history and preferences.
+- User Activity Tracking: Track user activity and behavior to personalize content recommendations and improve user engagement.
+- A/B Testing Framework: Implement an A/B testing framework to optimize UI/UX elements and content presentation.
+- Content Analytics Dashboard: Provide a comprehensive content analytics dashboard to track video performance metrics and user engagement.
+- Automated Tagging System: Develop an automated tagging system that assigns relevant tags to videos based on content analysis.
+- AI-Powered Thumbnail Generation: Use AI to generate compelling thumbnails for videos, enhancing click-through rates.
+- Deepfake Detection System: Implement an AI-powered tool to detect and flag deepfake videos, ensuring content integrity.
+- Community Moderation Tools: Provide community moderation tools to manage user-generated content and interactions.
+- Enhanced Reporting System: Develop an enhanced reporting system for users to flag inappropriate or harmful content.
+- User Feedback System: Implement a user feedback system to collect and analyze user opinions and suggestions.
+- Automated Content Summarization: Use AI to generate summaries of videos, providing users with a quick overview of the content.
+- Live Chat Support: Provide real-time live chat support to assist users with technical issues and inquiries.
+- Content Watermarking: Implement content watermarking to protect videos from unauthorized distribution.
+- Geo-Restriction System: Implement a geo-restriction system to control content availability based on geographic location.
+- Subscription Management Portal: Develop a subscription management portal for users to manage their premium subscriptions.
+- Automated Email Marketing Campaigns: Implement automated email marketing campaigns to promote new content and engage with users.
+- Multi-Language Support: Add support for multiple languages to cater to a diverse user base.
+- Accessibility Features: Implement accessibility features to cater to users with disabilities, including screen reader support and keyboard navigation.
+- Social Media Integration: Enable users to share videos on social media platforms.
+- Push Notification System: Implement a push notification system to notify users of new content and updates.
+- Security Audit Framework: Develop a security audit framework to regularly assess and improve the platform's security posture.
+- Content Localization: Localize content to different regions and languages, improving user engagement and reach.
+- AI-Powered Content Translation: Use AI to automatically translate video content into different languages.
+- Cross-Platform Compatibility: Ensure compatibility across different devices and platforms, including desktop, mobile, and smart TVs.
+- Advanced Content Delivery Network (CDN): Utilize an advanced CDN to optimize video streaming performance and minimize latency.
+- DDoS Protection: Implement DDoS protection to safeguard the platform from distributed denial-of-service attacks.
+- Data Encryption: Employ data encryption to protect sensitive user data and content.
+- Two-Factor Authentication: Implement two-factor authentication to enhance user account security.
+- AI-Driven Content Moderation: Use AI to automatically moderate user-generated content and interactions.
+- Dynamic Content Loading: Implement dynamic content loading to improve page load times and reduce bandwidth consumption.
+- AI-Powered Customer Support: Use AI to provide automated customer support and address user inquiries.
+- Voice Search Integration: Enable users to search for videos using voice commands.
+- Interactive Tutorials: Provide interactive tutorials to guide new users through the platform's features and functionalities.
+- AI-Powered Content Curation Tool: Admin panel uses AI to add, remove, and manage videos and associated metadata.
+- Variable Playback Speed: Allow users to adjust the playback speed of videos.
+- Looping: Enable video looping for continuous playback.
+- Picture-in-Picture Mode: Support picture-in-picture mode for multitasking.
+- Video Bookmarks: Allow users to create and manage video bookmarks.
+- Keyboard Shortcuts: Implement keyboard shortcuts for video playback controls.
+- Auto-Play Next Episode: Automatically play the next episode in a series.
+- Playback History: Maintain a playback history for users to easily resume watching videos.
+- Gesture Controls: Implement gesture controls for mobile video playback.
+- Chromecast Support: Enable video casting to Chromecast devices.
+- AirPlay Support: Enable video casting to AirPlay devices.
+- 360° Video Support: Support playback of 360° videos.
+- VR Video Support: Support playback of VR videos.
+- Spatial Audio Support: Implement spatial audio support for immersive sound.
+- Audio Normalization: Normalize audio levels to ensure consistent volume.
+- Audio Equalizer: Provide an audio equalizer for users to customize sound.
+- Subtitle Styling: Allow users to customize subtitle styling.
+- Subtitle Search: Enable searching within subtitles.
+- Dual Audio Support: Support videos with dual audio tracks.
+- Audio-Only Mode: Provide an audio-only mode for listening to videos in the background.
+- Video Filters: Implement video filters to enhance visual quality.
+- Zoom Functionality: Enable users to zoom in and out of videos.
+- Screenshot Capture: Allow users to capture screenshots from videos.
+- Video Rotation: Enable users to rotate videos.
+- Frame-by-Frame Navigation: Implement frame-by-frame navigation for detailed viewing.
+- HDR Video Support: Support playback of HDR videos.
+- AV1 Codec Support: Support the AV1 video codec.
+- Multi-Monitor Support: Enable video playback across multiple monitors.
+- Bandwidth Usage Control: Provide options for users to control bandwidth usage.
+- Theater Mode: Implement a theater mode for distraction-free viewing.
+
+## Style Guidelines:
+
+- Primary color: Deep vibrant red (#DC143C), evoking passion and energy.
+- Background color: Dark, desaturated red (#260A0F), providing contrast and a premium feel.
+- Accent color: Soft orange (#FFB347), used sparingly for interactive elements and highlights to draw attention.
+- Headline font: 'Playfair', serif, for an elegant and fashionable feel.
+- Body font: 'PT Sans', sans-serif, for a modern and readable style, especially in longer texts and paragraphs.
+- Use minimalistic, elegant icons to represent different categories and actions. Design and implement the official PlayNite logo/icon where required.
+- Modern, card-based layout to present video thumbnails and information effectively. Includes 60+ required pages/screens in total. Fix all non-working features, UI issues, buttons, etc. across both panels. Also complete the project by creating all missing pages, features, and required screens.
+- Subtle animations for hover effects and transitions to enhance user engagement.

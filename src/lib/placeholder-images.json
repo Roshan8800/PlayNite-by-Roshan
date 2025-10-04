@@ -1,0 +1,118 @@
+{
+  "placeholderImages": [
+    {
+      "id": "monica",
+      "description": "Monica character in a traditional south indian saree",
+      "imageUrl": "https://images.unsplash.com/photo-1574787930606-be7ba679cf82?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxJbmRpYW4lMjB3b21hbiUyMHNhcmVlfGVufDB8fHx8MTc1OTE1MDUzNXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "Indian woman saree"
+    },
+    {
+      "id": "jonny",
+      "description": "Jonny character as a doctor in a clinic",
+      "imageUrl": "https://images.unsplash.com/photo-1614105687119-93b4f75e8ca9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8bWFsZSUyMGRvY3RvciUyMGNsaW5pY3xlbnwwfHx8fDE3NTkxNTA1MzV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "male doctor clinic"
+    },
+    {
+      "id": "room",
+      "description": "A beautifully decorated traditional room for suhagrat",
+      "imageUrl": "https://images.unsplash.com/photo-1653547781600-ede0eed92f7d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxkZWNvcmF0ZWQlMjBiZWRyb29tfGVufDB8fHx8MTc1OTE1MDUzNXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "decorated bedroom"
+    },
+    {
+      "id": "clinic",
+      "description": "A medical clinic environment",
+      "imageUrl": "https://images.unsplash.com/photo-1524758631624-e2822e304c36?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxkb2N0b3IlMjBvZmZpY2V8ZW58MHx8fHwxNzU5MDM4ODI0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "doctor office"
+    },
+    {
+      "id": "video-1",
+      "description": "Abstract movie still",
+      "imageUrl": "https://images.unsplash.com/photo-1736564176042-b3d49989b230?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMG1vdmllfGVufDB8fHx8MTc1OTE0MTI0M3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "abstract movie"
+    },
+    {
+      "id": "video-2",
+      "description": "Neon lights in a city",
+      "imageUrl": "https://images.unsplash.com/photo-1506994011460-5482746d30a1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxuZW9uJTIwbGlnaHRzfGVufDB8fHx8MTc1OTEyNzQ3M3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "neon lights"
+    },
+    {
+      "id": "video-3",
+      "description": "City at night",
+      "imageUrl": "https://images.unsplash.com/photo-1605702012553-e954fbde66eb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxjaXR5JTIwbmlnaHR8ZW58MHx8fHwxNzU5MTI3MDU3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "city night"
+    },
+    {
+      "id": "video-4",
+      "description": "Action movie scene",
+      "imageUrl": "https://images.unsplash.com/photo-1719010552063-ee537190829e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8YWN0aW9uJTIwc2NlbmV8ZW58MHx8fHwxNzU5MTE3MzY2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "action scene"
+    },
+    {
+      "id": "video-5",
+      "description": "Sci-fi concept art",
+      "imageUrl": "https://images.unsplash.com/photo-1672236959779-1a1dcf0b0ab6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxzY2lmaSUyMGFydHxlbnwwfHx8fDE3NTkxNDgwMTN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "scifi art"
+    },
+    {
+      "id": "video-6",
+      "description": "Fantasy landscape",
+      "imageUrl": "https://images.unsplash.com/photo-1550100136-e092101726f4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxmYW50YXN5JTIwbGFuZHNjYXBlfGVufDB8fHx8MTc1OTA5ODE4NXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "fantasy landscape"
+    },
+    {
+      "id": "reel-1",
+      "description": "Person dancing",
+      "imageUrl": "https://images.unsplash.com/photo-1504609813442-a8924e83f76e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxkYW5jaW5nfGVufDB8fHx8MTc1OTA4NzE5NXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "dancing"
+    },
+    {
+      "id": "reel-2",
+      "description": "Funny video clip",
+      "imageUrl": "https://images.unsplash.com/photo-1753351058555-34c0f9e4a5a6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxmdW5ueSUyMHZpZGVvfGVufDB8fHx8MTc1OTE1MDUzNXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "funny video"
+    },
+    {
+      "id": "reel-3",
+      "description": "Travel video",
+      "imageUrl": "https://images.unsplash.com/photo-1707343848552-893e05dba6ac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MXwxfHNlYXJjaHw4fHx0cmF2ZWx8ZW58MHx8fHwxNzU5MTUwMTQ3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "travel"
+    },
+    {
+      "id": "story-1",
+      "description": "User portrait",
+      "imageUrl": "https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxwb3J0cmFpdCUyMHVzZXJ8ZW58MHx8fHwxNzU5MTUwNTM1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "portrait user"
+    },
+    {
+      "id": "story-2",
+      "description": "User selfie",
+      "imageUrl": "https://images.unsplash.com/photo-1662695089339-a2c24231a3ac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHx1c2VyJTIwc2VsZmllfGVufDB8fHx8MTc1OTE0NTYxNnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "user selfie"
+    },
+    {
+      "id": "story-3",
+      "description": "Happy person",
+      "imageUrl": "https://images.unsplash.com/photo-1543269664-56d93c1b41a6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxoYXBweSUyMHBlcnNvbnxlbnwwfHx8fDE3NTkxMTUwNDF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "happy person"
+    },
+    {
+      "id": "story-4",
+      "description": "Person outdoors",
+      "imageUrl": "https://images.unsplash.com/photo-1505731266723-9adc6eb6ea96?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxwZXJzb24lMjBoaWtpbmd8ZW58MHx8fHwxNzU5MTQxNzE2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "person hiking"
+    },
+    {
+      "id": "story-5",
+      "description": "Person at a cafe",
+      "imageUrl": "https://images.unsplash.com/photo-1583124688221-728de3b79b09?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwZXJzb24lMjBjYWZlfGVufDB8fHx8MTc1OTEwODE3N3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "person cafe"
+    },
+    {
+      "id": "avatar-1",
+      "description": "User avatar",
+      "imageUrl": "https://images.unsplash.com/photo-1580489944761-15a19d654956?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx1c2VyJTIwYXZhdGFyfGVufDB8fHx8MTc1OTEzNTM4OHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "user avatar"
+    }
+  ]
+}
