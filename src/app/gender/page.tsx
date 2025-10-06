@@ -21,9 +21,7 @@ export default function GenderSelectionPage() {
   const handleContinue = () => {
     if (selectedGender) {
       setIsLoading(true);
-      setTimeout(() => {
-        router.push("/18plus?verified=true");
-      }, 1000);
+      router.push("/login");
     }
   };
 
