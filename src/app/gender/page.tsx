@@ -22,7 +22,7 @@ export default function GenderSelectionPage() {
     if (selectedGender) {
       setIsLoading(true);
       setTimeout(() => {
-        router.push("/main");
+        router.push("/18plus?verified=true");
       }, 1000);
     }
   };
