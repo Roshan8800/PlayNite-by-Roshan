@@ -85,12 +85,13 @@ export function ErrorFallback({
         icon: <WifiOff className="w-8 h-8 text-orange-500" />,
         title: 'Connection Problem',
         description: 'Please check your internet connection and try again.',
-        variant: 'warning' as const,
+        variant: 'default' as const,
         primaryAction: onRetry ? {
           label: 'Try Again',
           onClick: handleRetry,
           icon: <RefreshCw className="w-4 h-4" />,
-          disabled: isRetrying
+          disabled: isRetrying,
+          variant: 'outline' as const
         } : undefined
       };
     }
@@ -100,11 +101,12 @@ export function ErrorFallback({
         icon: <Lock className="w-8 h-8 text-red-500" />,
         title: 'Authentication Required',
         description: 'Please sign in to continue accessing this content.',
-        variant: 'error' as const,
+        variant: 'destructive' as const,
         primaryAction: {
           label: 'Sign In',
           onClick: () => window.location.href = '/login',
-          icon: <Lock className="w-4 h-4" />
+          icon: <Lock className="w-4 h-4" />,
+          variant: 'default' as const
         }
       };
     }
@@ -114,11 +116,12 @@ export function ErrorFallback({
         icon: <Shield className="w-8 h-8 text-yellow-500" />,
         title: 'Access Denied',
         description: 'You don\'t have permission to access this content.',
-        variant: 'warning' as const,
+        variant: 'default' as const,
         primaryAction: onGoHome ? {
           label: 'Go Home',
           onClick: onGoHome,
-          icon: <RefreshCw className="w-4 h-4" />
+          icon: <RefreshCw className="w-4 h-4" />,
+          variant: 'outline' as const
         } : undefined
       };
     }
@@ -128,12 +131,13 @@ export function ErrorFallback({
         icon: <Database className="w-8 h-8 text-red-500" />,
         title: 'Data Unavailable',
         description: 'We\'re having trouble loading the data. Please try again.',
-        variant: 'error' as const,
+        variant: 'destructive' as const,
         primaryAction: onRetry ? {
           label: 'Retry',
           onClick: handleRetry,
           icon: <RefreshCw className="w-4 h-4" />,
-          disabled: isRetrying
+          disabled: isRetrying,
+          variant: 'outline' as const
         } : undefined
       };
     }
@@ -143,12 +147,13 @@ export function ErrorFallback({
         icon: <Server className="w-8 h-8 text-orange-500" />,
         title: 'Service Unavailable',
         description: 'An external service is temporarily unavailable. Please try again later.',
-        variant: 'warning' as const,
+        variant: 'default' as const,
         primaryAction: onRetry ? {
           label: 'Try Later',
           onClick: handleRetry,
           icon: <Clock className="w-4 h-4" />,
-          disabled: isRetrying
+          disabled: isRetrying,
+          variant: 'outline' as const
         } : undefined
       };
     }
@@ -158,12 +163,13 @@ export function ErrorFallback({
       icon: <AlertTriangle className="w-8 h-8 text-red-500" />,
       title: 'Something went wrong',
       description: 'An unexpected error occurred. Please try again or contact support if the problem persists.',
-      variant: 'error' as const,
+      variant: 'destructive' as const,
       primaryAction: onRetry ? {
         label: 'Try Again',
         onClick: handleRetry,
         icon: <RefreshCw className="w-4 h-4" />,
-        disabled: isRetrying
+        disabled: isRetrying,
+        variant: 'default' as const
       } : undefined,
       secondaryAction: onGoHome ? {
         label: 'Go Home',
@@ -189,7 +195,7 @@ export function ErrorFallback({
           {config.primaryAction && (
             <Button
               size="sm"
-              variant={config.primaryAction.variant || 'outline'}
+              variant={config.primaryAction.variant}
               onClick={config.primaryAction.onClick}
               disabled={config.primaryAction.disabled}
             >

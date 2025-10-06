@@ -51,9 +51,10 @@ export class RetryManager {
           maxDelay
         );
 
+        const errorMessage = error instanceof Error ? error.message : String(error);
         // Report retry attempt to error manager
         this.errorManager.reportError(
-          `Retry attempt ${attempt}/${maxAttempts} failed: ${error.message}`,
+          `Retry attempt ${attempt}/${maxAttempts} failed: ${errorMessage}`,
           ErrorCategory.NETWORK,
           undefined, // severity will be auto-determined
           {
@@ -62,7 +63,7 @@ export class RetryManager {
               attempt,
               maxAttempts,
               delay,
-              originalError: error.message
+              originalError: errorMessage
             }
           }
         );
@@ -176,9 +177,10 @@ export class CircuitBreakerManager {
     try {
       return await circuitBreaker.execute(operation);
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
       // Report circuit breaker events to error manager
       this.errorManager.reportError(
-        `Circuit breaker '${name}' prevented operation: ${error.message}`,
+        `Circuit breaker '${name}' prevented operation: ${errorMessage}`,
         ErrorCategory.SYSTEM,
         undefined,
         {
@@ -207,13 +209,14 @@ export async function withNetworkRetry<T>(
     baseDelay: 1000,
     maxDelay: 5000,
     backoffMultiplier: 2,
-    retryCondition: (error) => {
+    retryCondition: (error: any) => {
       // Retry on network errors, timeouts, and 5xx status codes
       return (
-        error.name === 'NetworkError' ||
+        error instanceof Error &&
+        (error.name === 'NetworkError' ||
         error.name === 'TimeoutError' ||
         error.message?.includes('fetch') ||
-        (error.status && error.status >= 500)
+        ('status' in error && typeof error.status === 'number' && error.status >= 500))
       );
     },
     ...options

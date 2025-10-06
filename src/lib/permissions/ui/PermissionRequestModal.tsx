@@ -294,6 +294,28 @@ export const PermissionRequestModal: React.FC<PermissionRequestModalProps> = ({
         ],
         privacyNote: 'Storage access is limited to the app\'s designated folder. We respect your device\'s privacy settings.'
       },
+      [PermissionType.CALENDAR]: {
+        title: 'Calendar Access',
+        shortDescription: 'Add events to your calendar',
+        detailedExplanation: 'Calendar access allows the app to create and manage events in your calendar.',
+        benefits: [
+          'Schedule reminders and events',
+          'Sync with your personal calendar',
+          'Never miss important dates'
+        ],
+        privacyNote: 'Calendar access is only used to create events and never reads your existing appointments.'
+      },
+      [PermissionType.PHONE_STATE]: {
+        title: 'Phone State Access',
+        shortDescription: 'Handle interruptions gracefully',
+        detailedExplanation: 'Phone state access allows the app to detect incoming calls and pause or resume app activity accordingly.',
+        benefits: [
+          'Automatically pause videos during calls',
+          'Prevent interruptions during recording',
+          'Seamless user experience'
+        ],
+        privacyNote: 'Phone state access is only used to detect call status and never accesses your phone number or call history.'
+      },
       // Add more permission education content as needed
       [PermissionType.CONTACTS]: {
         title: 'Contact Access',

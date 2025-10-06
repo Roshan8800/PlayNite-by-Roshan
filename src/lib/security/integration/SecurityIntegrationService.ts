@@ -2,6 +2,7 @@ import { securityManager } from '../core/SecurityManager';
 import { authorizationService } from '../authorization/AuthorizationService';
 import { mfaService } from '../auth/MFAService';
 import { auth } from '@/lib/firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { panelSecurityManager } from '@/lib/panels/security/PanelSecurityManager';
 import { accessControlManager } from '@/lib/panels/managers/AccessControlManager';
 
@@ -126,7 +127,7 @@ export class SecurityIntegrationService {
 
       // Fallback to legacy authentication
       if (this.config.fallbackToLegacy) {
-        const userCredential = await auth.signInWithEmailAndPassword(email, password);
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
 
         return {
           success: true,

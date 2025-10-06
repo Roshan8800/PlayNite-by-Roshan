@@ -144,11 +144,12 @@ export class NotificationAutomationEngine {
 
       return newCampaign;
     } catch (error) {
+      const details = error instanceof Error ? { message: error.message, stack: error.stack } : { info: String(error) };
       throw new SocialError({
         message: 'Failed to create notification campaign',
         code: 'CAMPAIGN_CREATE_FAILED',
         statusCode: 500,
-        details: error,
+        details,
       });
     }
   }
@@ -199,11 +200,12 @@ export class NotificationAutomationEngine {
 
       console.log(`Campaign ${campaignId} paused`);
     } catch (error) {
+      const details = error instanceof Error ? { message: error.message, stack: error.stack } : { info: String(error) };
       throw new SocialError({
         message: 'Failed to pause campaign',
         code: 'CAMPAIGN_PAUSE_FAILED',
         statusCode: 500,
-        details: error as Record<string, any>,
+        details,
       });
     }
   }
@@ -222,11 +224,12 @@ export class NotificationAutomationEngine {
 
       console.log(`Campaign ${campaignId} stopped`);
     } catch (error) {
+      const details = error instanceof Error ? { message: error.message, stack: error.stack } : { info: String(error) };
       throw new SocialError({
         message: 'Failed to stop campaign',
         code: 'CAMPAIGN_STOP_FAILED',
         statusCode: 500,
-        details: error as Record<string, any>,
+        details,
       });
     }
   }
@@ -279,11 +282,12 @@ export class NotificationAutomationEngine {
       const templateRef = await addDoc(collection(db, 'notificationTemplates'), template);
       return { id: templateRef.id, ...template };
     } catch (error) {
+      const details = error instanceof Error ? { message: error.message, stack: error.stack } : { info: String(error) };
       throw new SocialError({
         message: 'Failed to create notification template',
         code: 'TEMPLATE_CREATE_FAILED',
         statusCode: 500,
-        details: error as Record<string, any>,
+        details,
       });
     }
   }

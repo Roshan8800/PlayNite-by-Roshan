@@ -97,7 +97,7 @@ export class SecurityManager {
   /**
    * Initialize all security systems
    */
-  private async initializeSecuritySystems(): Promise<void> {
+  public async initializeSecuritySystems(): Promise<void> {
     try {
       // Initialize data protection keys
       await this.dataProtection.initialize();

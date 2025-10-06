@@ -132,9 +132,20 @@ export interface NavigationAnalytics {
   recommendations: NavigationRecommendation[];
 }
 
+export type NavigationEventType =
+  | 'route_change'
+  | 'route_prefetch'
+  | 'route_error'
+  | 'navigation_intent'
+  | 'context_change'
+  | 'performance'
+  | 'user_engagement'
+  | 'flow_event'
+  | 'navigation';
+
 export interface NavigationEvent {
   eventId: string;
-  type: string;
+  type: NavigationEventType;
   route: string;
   timestamp: Date;
   duration?: number;
@@ -338,6 +349,10 @@ export interface NavigationAPIResponse<T> {
     requestId: string;
     cached?: boolean;
     processingTime?: number;
+    status?: string;
+    skipped?: string;
+    strategy?: string;
+    sampled?: boolean;
   };
 }
 

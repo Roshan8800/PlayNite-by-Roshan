@@ -88,7 +88,7 @@ export class PanelAnalyticsManager {
     const avgLoadTime = relevantAnalytics.reduce((sum, a) => sum + a.performanceMetrics.loadTime, 0) / relevantAnalytics.length;
     const avgInteractionLatency = relevantAnalytics.reduce((sum, a) => sum + a.performanceMetrics.interactionLatency, 0) / relevantAnalytics.length;
     const avgErrorRate = relevantAnalytics.reduce((sum, a) => sum + a.performanceMetrics.errorRate, 0) / relevantAnalytics.length;
-    const avgUserSatisfaction = relevantAnalytics.reduce((sum, a) => sum + (a.performanceMetrics.userSatisfaction || 0), 0) / relevantAnalytics.length;
+    const avgUserSatisfaction = relevantAnalytics.reduce((sum, a) => sum + (a.performanceMetrics.userSatisfaction ?? 0), 0) / relevantAnalytics.length;
 
     return {
       totalSessions,
@@ -130,7 +130,7 @@ export class PanelAnalyticsManager {
     const avgLoadTime = analytics.reduce((sum, a) => sum + a.performanceMetrics.loadTime, 0) / analytics.length;
     const avgInteractionLatency = analytics.reduce((sum, a) => sum + a.performanceMetrics.interactionLatency, 0) / analytics.length;
     const avgErrorRate = analytics.reduce((sum, a) => sum + a.performanceMetrics.errorRate, 0) / analytics.length;
-    const avgUserSatisfaction = analytics.reduce((sum, a) => sum + (a.performanceMetrics.userSatisfaction || 0), 0) / analytics.length;
+    const avgUserSatisfaction = analytics.reduce((sum, a) => sum + (a.performanceMetrics.userSatisfaction ?? 0), 0) / analytics.length;
 
     // Performance trends
     const performanceTrends = this.calculatePerformanceTrends(analytics);
@@ -227,7 +227,7 @@ export class PanelAnalyticsManager {
       existingMetrics.loadTime = (existingMetrics.loadTime * (1 - weight)) + (metrics.loadTime * weight);
       existingMetrics.interactionLatency = (existingMetrics.interactionLatency * (1 - weight)) + (metrics.interactionLatency * weight);
       existingMetrics.errorRate = (existingMetrics.errorRate * (1 - weight)) + (metrics.errorRate * weight);
-      existingMetrics.userSatisfaction = (existingMetrics.userSatisfaction * (1 - weight)) + ((metrics.userSatisfaction || 0) * weight);
+      existingMetrics.userSatisfaction = ((existingMetrics.userSatisfaction ?? 0) * (1 - weight)) + ((metrics.userSatisfaction ?? 0) * weight);
     } else {
       this.performanceMetrics.set(panelType, { ...metrics });
     }
@@ -256,7 +256,7 @@ export class PanelAnalyticsManager {
     }
 
     // Engagement-based recommendations
-    if (analytics.performanceMetrics.userSatisfaction < 70) {
+    if ((analytics.performanceMetrics.userSatisfaction ?? 0) < 70) {
       recommendations.push({
         id: `engage_${analytics.panelType}_${Date.now()}`,
         panelType: analytics.panelType,
@@ -386,7 +386,7 @@ export class PanelAnalyticsManager {
         existing.loadTime = (existing.loadTime + a.performanceMetrics.loadTime) / 2;
         existing.interactionLatency = (existing.interactionLatency + a.performanceMetrics.interactionLatency) / 2;
         existing.errorRate = (existing.errorRate + a.performanceMetrics.errorRate) / 2;
-        existing.userSatisfaction = (existing.userSatisfaction || 0) + (a.performanceMetrics.userSatisfaction || 0) / 2;
+        existing.userSatisfaction = ((existing.userSatisfaction ?? 0) + (a.performanceMetrics.userSatisfaction ?? 0)) / 2;
       } else {
         dailyMetrics.set(dayKey, { ...a.performanceMetrics });
       }
@@ -430,7 +430,7 @@ export class PanelAnalyticsManager {
       recommendations.push('Add more interactive elements to increase user engagement');
     }
 
-    const avgSatisfaction = analytics.reduce((sum, a) => sum + (a.performanceMetrics.userSatisfaction || 0), 0) / analytics.length;
+    const avgSatisfaction = analytics.reduce((sum, a) => sum + (a.performanceMetrics.userSatisfaction ?? 0), 0) / analytics.length;
     if (avgSatisfaction < 70) {
       recommendations.push('Improve user experience to increase satisfaction scores');
     }
@@ -482,7 +482,7 @@ export class PanelAnalyticsManager {
       optimizations.push('Implement retry mechanisms for failed operations');
     }
 
-    if (metrics.userSatisfaction < 70) {
+    if ((metrics.userSatisfaction ?? 0) < 70) {
       optimizations.push('Simplify user interface and reduce cognitive load');
       optimizations.push('Add contextual help and onboarding flows');
     }
