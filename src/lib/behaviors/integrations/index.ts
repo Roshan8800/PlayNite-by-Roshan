@@ -496,23 +496,34 @@ export class BehaviorServiceIntegrations {
     // Use enhanced recommendation flows
     if (includeBehavioralData && userId) {
       // Import and use enhanced recommendation functions
-      const { getVideoRecommendations } = await import('/home/user/studio/src/ai/flows/ai-powered-personalized-recommendations');
-      const { recommendVideos } = await import('/home/user/studio/src/ai/flows/content-recommendation-engine');
+      const { getVideoRecommendations } = await import('@/ai/flows/ai-powered-personalized-recommendations');
+      const { recommendVideos } = await import('@/ai/flows/content-recommendation-engine');
 
-      const recommendations = await getVideoRecommendations({
+      const flowContext = {
+        sessionId: context.sessionId || 'unknown',
+        currentPage: context.currentPage || '',
+        userAgent: context.userAgent || 'unknown',
+        timestamp: new Date(),
+        environment: context.environment || {
+          deviceType: 'unknown',
+          browser: 'unknown',
+          platform: 'unknown'
+        },
+      };
+
+      const result = await getVideoRecommendations({
         userId,
         viewingHistory: context.viewingHistory || '',
         preferences: context.preferences || '',
-        context: {
-          currentContent: '',
-          context: 'browsing',
-          similarUsers: [],
-          trendingTopics: []
-        },
+        context: flowContext,
         includeBehavioralData: true
       });
 
-      return recommendations.recommendations || [];
+      if (result && Array.isArray(result.recommendations)) {
+        return result.recommendations;
+      }
+
+      return [];
     }
 
     return [];

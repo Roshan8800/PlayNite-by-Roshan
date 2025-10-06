@@ -788,10 +788,10 @@ export class PlatformPermissionHandler {
    */
   private mapPermissionToWebAPI(type: PermissionType): PermissionName | null {
     const mapping: Record<PermissionType, PermissionName | null> = {
-      [PermissionType.CAMERA]: 'camera',
-      [PermissionType.MICROPHONE]: 'microphone',
-      [PermissionType.LOCATION]: 'geolocation',
-      [PermissionType.NOTIFICATIONS]: 'notifications',
+      [PermissionType.CAMERA]: 'camera' as PermissionName,
+      [PermissionType.MICROPHONE]: 'microphone' as PermissionName,
+      [PermissionType.LOCATION]: 'geolocation' as PermissionName,
+      [PermissionType.NOTIFICATIONS]: 'notifications' as PermissionName,
       [PermissionType.STORAGE]: null, // Not directly supported in Permissions API
       [PermissionType.CONTACTS]: null, // Not supported in web
       [PermissionType.CALENDAR]: null, // Not supported in web
@@ -805,15 +805,15 @@ export class PlatformPermissionHandler {
       [PermissionType.SYSTEM_ALERT_WINDOW]: null, // Not supported in web
       [PermissionType.WRITE_SETTINGS]: null, // Not supported in web
       [PermissionType.ACCESSIBILITY]: null, // Not supported in web
-      [PermissionType.RECORD_AUDIO]: 'microphone',
+      [PermissionType.RECORD_AUDIO]: 'microphone' as PermissionName,
       [PermissionType.MODIFY_AUDIO_SETTINGS]: null, // Not supported in web
       [PermissionType.BIND_VPN_SERVICE]: null, // Not supported in web
       [PermissionType.CAMERA_ROLL]: null, // Not supported in web
       [PermissionType.MEDIA_LIBRARY]: null, // Not supported in web
-      [PermissionType.SPEECH_RECOGNITION]: 'microphone',
-      [PermissionType.LOCATION_ALWAYS]: 'geolocation',
-      [PermissionType.LOCATION_WHEN_IN_USE]: 'geolocation',
-      [PermissionType.PUSH_NOTIFICATIONS]: 'notifications',
+      [PermissionType.SPEECH_RECOGNITION]: 'microphone' as PermissionName,
+      [PermissionType.LOCATION_ALWAYS]: 'geolocation' as PermissionName,
+      [PermissionType.LOCATION_WHEN_IN_USE]: 'geolocation' as PermissionName,
+      [PermissionType.PUSH_NOTIFICATIONS]: 'notifications' as PermissionName,
       [PermissionType.EXTERNAL_STORAGE]: null, // Not supported in web
       [PermissionType.NETWORK_STATE]: null, // Not supported in web
       [PermissionType.INTERNET]: null, // Not supported in web

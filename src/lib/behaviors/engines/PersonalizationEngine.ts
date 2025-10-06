@@ -588,7 +588,7 @@ export class PersonalizationEngine {
     }
 
     // Add trending content if user shows engagement with trending topics
-    if (context.trendingTopics && context.trendingTopics.length > 0) {
+    if (Array.isArray(context.trendingTopics) && context.trendingTopics.length > 0) {
       const trendingPattern = profile.behaviorPatterns.find(p => 
         p.patternType === 'engagement' && p.confidence > 0.7
       );
@@ -634,7 +634,7 @@ export class PersonalizationEngine {
       score += 0.4;
     }
 
-    if (recommendation.startsWith('trending:') && context.trendingTopics?.length > 0) {
+    if (recommendation.startsWith('trending:') && Array.isArray(context.trendingTopics) && context.trendingTopics.length > 0) {
       score += 0.1;
     }
 

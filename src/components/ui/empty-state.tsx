@@ -35,7 +35,12 @@ export interface EmptyStateProps {
   isLoading?: boolean;
 }
 
-const emptyStateConfig = {
+const emptyStateConfig: Record<Exclude<EmptyStateType, 'custom'>, {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  defaultActions: EmptyStateAction[];
+}> = {
   'no-content': {
     icon: <TrendingUp className="w-12 h-12 text-gray-400" />,
     title: 'No content yet',
@@ -172,25 +177,28 @@ export function EmptyState({
   onRetry,
   isLoading = false
 }: EmptyStateProps) {
-  const config = emptyStateConfig[type];
-  const displayTitle = title || config.title;
-  const displayDescription = description || config.description;
-  const displayIcon = icon || config.icon;
-  const displayActions = actions.length > 0 ? actions : config.defaultActions;
-
   const sizeClasses = {
     sm: 'py-8',
     md: 'py-12',
     lg: 'py-16'
   };
 
-  if (type === 'custom' && customContent) {
-    return (
-      <div className={`flex flex-col items-center justify-center text-center ${sizeClasses[size]} ${className}`}>
-        {customContent}
-      </div>
-    );
+  if (type === 'custom') {
+    if (customContent) {
+      return (
+        <div className={`flex flex-col items-center justify-center text-center ${sizeClasses[size]} ${className}`}>
+          {customContent}
+        </div>
+      );
+    }
+    return null;
   }
+
+  const config = emptyStateConfig[type];
+  const displayTitle = title || config.title;
+  const displayDescription = description || config.description;
+  const displayIcon = icon || config.icon;
+  const displayActions = actions.length > 0 ? actions : config.defaultActions;
 
   return (
     <Card className={`w-full ${className}`}>

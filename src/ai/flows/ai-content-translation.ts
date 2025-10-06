@@ -48,6 +48,6 @@ const aiContentTranslationFlow = ai.defineFlow(
   },
   async input => {
     const {output} = await prompt(input);
-    return {translatedContent: output!};
+    return output!;
   }
 );

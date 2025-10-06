@@ -90,9 +90,11 @@ export class RouteOptimizer {
         }
       };
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      const errorType: NavigationError['type'] = 'optimization_error';
       return {
         success: false,
-        error: this.createOptimizationError('OPTIMIZATION_ERROR', error.message, route),
+        error: this.createOptimizationError(errorType, errorMessage, route),
         metadata: {
           timestamp: new Date(),
           version: '1.0.0',
@@ -141,9 +143,11 @@ export class RouteOptimizer {
         }
       };
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      const errorType: NavigationError['type'] = 'optimization_error';
       return {
         success: false,
-        error: this.createOptimizationError('PREFETCH_ERROR', error.message, route),
+        error: this.createOptimizationError(errorType, errorMessage, route),
         metadata: {
           timestamp: new Date(),
           version: '1.0.0',
@@ -327,7 +331,9 @@ export class RouteOptimizer {
         await this.applyCompression(route, strategy);
         break;
       default:
-        throw new Error(`Unknown optimization strategy: ${strategy.type}`);
+        // Exhaustive check
+        const exhaustiveCheck: never = strategy.type;
+        throw new Error(`Unknown optimization strategy: ${exhaustiveCheck}`);
     }
   }
 
@@ -589,7 +595,7 @@ export class RouteOptimizer {
     };
   }
 
-  private createOptimizationError(type: string, message: string, route?: string): NavigationError {
+  private createOptimizationError(type: NavigationError['type'], message: string, route?: string): NavigationError {
     return {
       errorId: `${type}_${Date.now()}`,
       type,

@@ -466,6 +466,7 @@ export function NotificationManagement({
                     onClick={() => onNotificationClick(notification)}
                     onMarkAsRead={() => onMarkAsRead(notification.id)}
                     onDelete={() => onDeleteNotification(notification.id)}
+                    onBulkAction={handleBulkAction}
                     formatTimeAgo={formatTimeAgo}
                   />
                 ))}
@@ -486,6 +487,7 @@ interface NotificationManagementCardProps {
   onClick: () => void;
   onMarkAsRead: () => void;
   onDelete: () => void;
+  onBulkAction: (action: string, notificationIds: string[]) => void;
   formatTimeAgo: (date: string) => string;
 }
 
@@ -496,6 +498,7 @@ function NotificationManagementCard({
   onClick,
   onMarkAsRead,
   onDelete,
+  onBulkAction,
   formatTimeAgo,
 }: NotificationManagementCardProps) {
   const isArchived = (notification as any).archived;

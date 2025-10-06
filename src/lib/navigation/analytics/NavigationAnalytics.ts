@@ -95,9 +95,11 @@ export class NavigationAnalytics {
         }
       };
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      const errorType: NavigationError['type'] = 'optimization_error';
       return {
         success: false,
-        error: this.createNavigationError('TRACKING_ERROR', error.message),
+        error: this.createNavigationError(errorType, errorMessage),
         metadata: {
           timestamp: new Date(),
           version: '1.0.0',
@@ -147,9 +149,11 @@ export class NavigationAnalytics {
         }
       };
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      const errorType: NavigationError['type'] = 'optimization_error';
       return {
         success: false,
-        error: this.createNavigationError('METRICS_ERROR', error.message),
+        error: this.createNavigationError(errorType, errorMessage),
         metadata: {
           timestamp: new Date(),
           version: '1.0.0',
@@ -195,9 +199,11 @@ export class NavigationAnalytics {
         }
       };
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      const errorType: NavigationError['type'] = 'optimization_error';
       return {
         success: false,
-        error: this.createNavigationError('INSIGHTS_ERROR', error.message),
+        error: this.createNavigationError(errorType, errorMessage),
         metadata: {
           timestamp: new Date(),
           version: '1.0.0',
@@ -494,7 +500,7 @@ export class NavigationAnalytics {
       });
     }
 
-    const metrics = this.metricsCache.get(route)!;
+    const metrics = this.metricsCache.get(route) as NavigationMetrics;
     metrics.totalNavigations++;
   }
 
@@ -502,16 +508,36 @@ export class NavigationAnalytics {
     // Update performance metrics
     if (event.duration) {
       // Update average load time
-      const currentMetrics = this.metricsCache.get('performance') || {
-        averageLoadTime: 0,
-        count: 0
-      };
+      let perfMetrics = this.metricsCache.get('performance');
 
-      currentMetrics.count = (currentMetrics.count || 0) + 1;
-      currentMetrics.averageLoadTime =
-        (currentMetrics.averageLoadTime * (currentMetrics.count - 1) + event.duration) / currentMetrics.count;
+      if (!perfMetrics) {
+        perfMetrics = {
+          totalNavigations: 0,
+          uniqueRoutes: 0,
+          averageSessionLength: 0,
+          bounceRate: 0,
+          exitRate: 0,
+          performanceMetrics: {
+            averageLoadTime: 0,
+            averageBundleSize: 0,
+            cacheHitRate: 0,
+            prefetchAccuracy: 0
+          },
+          userEngagement: {
+            timeOnPage: 0,
+            scrollDepth: 0,
+            interactionRate: 0
+          }
+        };
+      }
+      const oldCount = perfMetrics.totalNavigations;
+      const oldAverage = perfMetrics.performanceMetrics.averageLoadTime;
 
-      this.metricsCache.set('performance', currentMetrics);
+      perfMetrics.totalNavigations = oldCount + 1;
+      perfMetrics.performanceMetrics.averageLoadTime =
+        (oldAverage * oldCount + event.duration) / (perfMetrics.totalNavigations);
+
+      this.metricsCache.set('performance', perfMetrics);
     }
   }
 
@@ -532,7 +558,7 @@ export class NavigationAnalytics {
     return `evt_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
   }
 
-  private createNavigationError(type: string, message: string): NavigationError {
+  private createNavigationError(type: NavigationError['type'], message: string): NavigationError {
     return {
       errorId: `${type}_${Date.now()}`,
       type,
