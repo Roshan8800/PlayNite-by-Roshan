@@ -19,15 +19,11 @@ export default function GenderSelectionPage() {
   };
 
   const handleContinue = () => {
-    if (selectedGender === "male") {
+    if (selectedGender) {
       setIsLoading(true);
-      // Navigate to Monica page for male selection
       setTimeout(() => {
-        router.push("/");
+        router.push("/main");
       }, 1000);
-    } else if (selectedGender === "female") {
-      // Show placeholder for future implementation
-      alert("Female guide coming soon! Please select Male for now.");
     }
   };
 
@@ -101,7 +97,7 @@ export default function GenderSelectionPage() {
                 <div>
                   <h3 className="text-xl font-semibold text-white mb-2">Female Guide</h3>
                   <p className="text-gray-400 text-sm">
-                    Coming soon - Stay tuned for our female guide!
+                    Continue to PlayNite - Your Journey Awaits
                   </p>
                 </div>
                 {selectedGender === "female" && (
@@ -120,15 +116,11 @@ export default function GenderSelectionPage() {
             className="w-full bg-primary hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed"
             size="lg"
           >
-            {isLoading ? (
-              "Loading..."
-            ) : selectedGender === "male" ? (
-              "Continue to PlayNite"
-            ) : selectedGender === "female" ? (
-              "Coming Soon"
-            ) : (
-              "Select a Guide"
-            )}
+            {isLoading
+              ? "Loading..."
+              : selectedGender
+              ? "Continue to PlayNite"
+              : "Select a Guide"}
           </Button>
 
           <div className="text-center text-xs text-gray-500">
