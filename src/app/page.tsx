@@ -5,7 +5,7 @@ import { useForm, type SubmitHandler, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { differenceInYears, getDaysInMonth, isFuture, isValid } from "date-fns";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -79,6 +79,16 @@ export default function AgeVerificationPage() {
   const watchedMonth = useWatch({ control, name: "month" });
   const watchedYear = useWatch({ control, name: "year" });
   const watchedDay = useWatch({ control, name: "day" });
+  const [months, setMonths] = useState<{ value: number; label: string }[]>([]);
+
+  useEffect(() => {
+    setMonths(
+      Array.from({ length: 12 }, (_, i) => ({
+        value: i + 1,
+        label: new Date(0, i).toLocaleString("default", { month: "long" }),
+      }))
+    );
+  }, []);
 
   const daysInMonth = useMemo(() => {
     if (watchedYear && watchedMonth) {
@@ -108,10 +118,6 @@ export default function AgeVerificationPage() {
     { length: currentYear - 1900 + 1 },
     (_, i) => currentYear - i
   );
-  const months = Array.from({ length: 12 }, (_, i) => ({
-    value: i + 1,
-    label: new Date(0, i).toLocaleString("default", { month: "long" }),
-  }));
   const days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
   const { errors } = form.formState;
 
@@ -143,7 +149,7 @@ export default function AgeVerificationPage() {
                         onValueChange={(value: string) => {
                           field.onChange(parseInt(value));
                         }}
-                        value={field.value?.toString()}
+                        defaultValue={field.value?.toString()}
                       >
                         <FormControl>
                           <SelectTrigger>
@@ -199,7 +205,7 @@ export default function AgeVerificationPage() {
                         onValueChange={(value: string) => {
                           field.onChange(parseInt(value));
                         }}
-                        value={field.value?.toString()}
+                        defaultValue={field.value?.toString()}
                       >
                         <FormControl>
                           <SelectTrigger>
