@@ -1,50 +1,18 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
-import { VideoDatabaseStats } from '@/lib/services/video-database-service';
+import { VideoDatabaseService } from '@/lib/services/video-database-service';
+
+const videoDatabaseService = new VideoDatabaseService();
 
 export async function GET() {
   try {
-    const csvFilePath = path.join(process.cwd(), 'pornhub-database', 'pornhub.com-db.csv');
+    console.log('Fetching video database statistics...');
 
-    if (!fs.existsSync(csvFilePath)) {
-      // Return mock stats if CSV doesn't exist
-      const mockStats: VideoDatabaseStats = {
-        totalVideos: 530672,
-        totalSize: 1932737280, // 1.8GB
-        sources: ['brazzers.com', 'cumbots.com', 'realitykings.com', 'bangbros.com', 'naughtyamerica.com'],
-        categories: ['Brunette', 'Toys', 'Pornstar', 'Big Tits', 'Blowjob', 'MILF', 'Teen', 'Anal', 'HD', 'VR'],
-        performers: ['Gen Padova', 'Mandy May', 'Lani Lane', 'Alicia Rhodes', 'Brooke', 'Many More'],
-        dateRange: {
-          earliest: '2007-12-10',
-          latest: '2022-12-31'
-        },
-        averageDuration: 847, // ~14 minutes average
-        totalViews: 12500000000 // 12.5 billion total views
-      };
+    // Get actual stats from the database service
+    const stats = await videoDatabaseService.getDatabaseStats();
 
-      return NextResponse.json(mockStats);
-    }
+    console.log(`Stats calculated: ${stats.totalVideos} videos, ${stats.sources.length} sources`);
 
-    // Calculate actual stats from CSV file
-    const stats = fs.statSync(csvFilePath);
-
-    // For demo purposes, return comprehensive stats
-    const databaseStats: VideoDatabaseStats = {
-      totalVideos: 530672,
-      totalSize: stats.size,
-      sources: ['brazzers.com', 'cumbots.com', 'realitykings.com', 'bangbros.com', 'naughtyamerica.com', 'pornpros.com'],
-      categories: ['Brunette', 'Toys', 'Pornstar', 'Big Tits', 'Blowjob', 'MILF', 'Teen', 'Anal', 'HD', 'VR', 'Amateur', 'Professional'],
-      performers: ['Gen Padova', 'Mandy May', 'Lani Lane', 'Alicia Rhodes', 'Brooke', 'Many More Performers'],
-      dateRange: {
-        earliest: '2007-12-10',
-        latest: '2022-12-31'
-      },
-      averageDuration: 847,
-      totalViews: 12500000000
-    };
-
-    return NextResponse.json(databaseStats);
+    return NextResponse.json(stats);
 
   } catch (error) {
     console.error('Error getting video stats:', error);

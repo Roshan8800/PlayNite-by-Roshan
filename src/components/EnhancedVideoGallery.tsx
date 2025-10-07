@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useMemo } from 'react';
-import { VideoPlayer } from '@/components/ui/video-player';
+import { IframeVideoPlayer } from '@/components/ui/iframe-video-player';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -429,7 +429,7 @@ export const EnhancedVideoGallery: React.FC<EnhancedVideoGalleryProps> = ({
 
             <div className="bg-background rounded-lg overflow-hidden">
               <div className="aspect-video">
-                <VideoPlayer
+                <IframeVideoPlayer
                   src={selectedVideo.embedUrl}
                   poster={selectedVideo.primaryThumbnail}
                   title={selectedVideo.title}
