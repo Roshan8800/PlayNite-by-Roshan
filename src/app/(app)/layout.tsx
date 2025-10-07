@@ -14,22 +14,24 @@ import {
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
     <ProtectedRoute>
-      <SearchProvider>
-        <SidebarProvider>
-          <Sidebar>
-            <SidebarContent>
-              <MainNav />
-            </SidebarContent>
-          </Sidebar>
-          <SidebarInset>
-            <Header />
-            <main className="min-h-screen pb-20 md:pb-0">
-              {children}
-            </main>
-          </SidebarInset>
-          <BottomNav />
-        </SidebarProvider>
-      </SearchProvider>
+      <ContentProvider>
+        <SearchProvider>
+          <SidebarProvider>
+            <Sidebar>
+              <SidebarContent>
+                <MainNav />
+              </SidebarContent>
+            </Sidebar>
+            <SidebarInset>
+              <Header />
+              <main className="min-h-screen pb-20 md:pb-0">
+                {children}
+              </main>
+            </SidebarInset>
+            <BottomNav />
+          </SidebarProvider>
+        </SearchProvider>
+      </ContentProvider>
     </ProtectedRoute>
   );
 }

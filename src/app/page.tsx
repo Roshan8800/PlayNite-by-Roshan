@@ -108,7 +108,7 @@ export default function AgeVerificationPage() {
     const age = differenceInYears(new Date(), birthDate);
 
     if (age >= 18) {
-      router.push("/gender");
+      router.push("/login");
     } else {
       router.push("/study");
     }
