@@ -143,7 +143,7 @@ export default function AgeVerificationPage() {
                         onValueChange={(value: string) => {
                           field.onChange(parseInt(value));
                         }}
-                        defaultValue={field.value?.toString()}
+                        value={field.value?.toString()}
                       >
                         <FormControl>
                           <SelectTrigger>
@@ -199,7 +199,7 @@ export default function AgeVerificationPage() {
                         onValueChange={(value: string) => {
                           field.onChange(parseInt(value));
                         }}
-                        defaultValue={field.value?.toString()}
+                        value={field.value?.toString()}
                       >
                         <FormControl>
                           <SelectTrigger>
