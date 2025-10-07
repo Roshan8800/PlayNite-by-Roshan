@@ -66,7 +66,7 @@ export default function LoginPage() {
         <div className="mx-auto w-fit">
           <PlayNiteLogo />
         </div>
-        <CardTitle className="font-headline text-3xl">Welcome Back</CardTitle>
+        <CardTitle className="font-headline text-2xl sm:text-3xl">Welcome Back</CardTitle>
         <CardDescription>
           Enter your credentials to access your account.
         </CardDescription>

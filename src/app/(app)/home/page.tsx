@@ -74,18 +74,18 @@ export default function HomePage() {
         )}
 
         {storiesLoading ? (
-          <div className="flex space-x-4 overflow-x-auto pb-4">
+          <div className="flex flex-wrap gap-4 pb-4">
             {Array.from({ length: 8 }).map((_, index) => (
-              <div key={index} className="flex flex-col items-center space-y-2 flex-shrink-0">
+              <div key={index} className="flex flex-col items-center space-y-2">
                 <Skeleton className="w-20 h-20 rounded-full" />
                 <Skeleton className="w-16 h-3" />
               </div>
             ))}
           </div>
         ) : (
-          <div className="flex space-x-4 overflow-x-auto pb-4">
+          <div className="flex flex-wrap gap-4 pb-4">
             {stories.map((storyData) => (
-              <div key={storyData.id} className="flex flex-col items-center space-y-2 flex-shrink-0">
+              <div key={storyData.id} className="flex flex-col items-center space-y-2">
                 <div className={`relative w-20 h-20 rounded-full p-1 ${
                   storyData.isViewed
                     ? 'bg-muted'

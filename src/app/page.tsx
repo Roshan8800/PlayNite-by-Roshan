@@ -128,7 +128,7 @@ export default function AgeVerificationPage() {
           <div className="mx-auto w-fit">
             <PlayNiteLogo />
           </div>
-          <CardTitle className="font-headline text-3xl">
+          <CardTitle className="font-headline text-2xl sm:text-3xl">
             Verify Your Age
           </CardTitle>
           <CardDescription>
@@ -138,7 +138,7 @@ export default function AgeVerificationPage() {
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                 <FormField
                   control={form.control}
                   name="month"
